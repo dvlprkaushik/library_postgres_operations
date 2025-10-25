@@ -1,0 +1,21 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  author VARCHAR(100),
+  published_year INT
+);
+
+CREATE TABLE borrowed_books (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id) ON DELETE CASCADE,
+  book_id INT REFERENCES books(id) ON DELETE CASCADE,
+  borrow_date DATE NOT NULL,
+  return_date DATE
+);
